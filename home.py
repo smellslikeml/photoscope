@@ -2,6 +2,7 @@
 import os
 import cv2
 import numpy as np
+import time
 from glob import glob
 from functools import partial
 from flask import Flask
@@ -13,10 +14,17 @@ data_dir = '/path/to/images'
 bins = 128
 num_results = 20
 
+start = time.time()
+
 img_lst = glob(data_dir + '*')
 print('Calculating image features')
 color_hist_ = partial(color_hist, bins)
 corpus_features = list(map(color_hist_, img_lst)) # bottleneck
+
+end = time.time()
+elapsed = end - start
+elapsed_fmt = time.strftime("%H:%M:%S", time.gmtime(elapsed))
+print('Finished feature calculation in {}, beginning search...'.format(elapsed_fmt))
 
 def color_hist(bins, img_pth):
     img = cv2.imread(img_pth, 0)
