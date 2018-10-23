@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../static/style.css">
+	</head>
+
+	<body>
+		<div id="columns">
+
+		   <figure>
+                     <video controls="true" width="800" height="600" name="fistbump" src="http://quicoesmiperrito.com/static/IMG_0266.mp4" type='video/mp4'></video>
+		   </figure>
+
+		  <figure>
+		     <img src="../static/IMG_0250.PNG">
+		     <figcaption>Federico Rodriguez Mayorquin</figcaption>
+		  </figure>
+
+		  <figure>
+		     <img src="../static/IMG_0265.JPG">
+		     <figcaption>No pos guauuu Quico...</figcaption>
+		  </figure>
+
+		  <figure>
+		     <img src="../static/IMG_0261.JPG">
+		     <figcaption>El hijo mas peludo!</figcaption>
+		  </figure>
+
+		  <figure>
+		     <img src="../static/IMG_0262.JPG">
+		     <figcaption>Con Hannita</figcaption>
+		  </figure>
+
+
+			
+			<figure>
+			<img src="../static/IMG_4204.JPG">
+			<figcaption>Ese Quiquin!</figcaption>
+			</figure>
+		  <figure>
+		  <img src="../static/IMG_5847.jpg">
+			<figcaption>Quico Baby</figcaption>
+			</figure>
+			
+		  <figure>
+			<img src="../static/IMG_6249.JPG">
+			<figcaption>Quiquitazo</figcaption>
+			</figure>
+		  
+			<figure>
+			<img src="../static/IMG_6491.JPG">
+			<figcaption>Poochito pedorro</figcaption>
+			</figure>
+			
+		   <figure>
+			 <img src="../static/IMG_6624.JPG">
+			<figcaption>poooooooooochieees</figcaption>
+			</figure>
+			
+		   <figure>
+			 <img src="../static/IMG_6625.JPG">
+			<figcaption>quico es mi perrito</figcaption>
+			</figure>
+		  <figure>
+		     <img src="../static/IMG_0256.JPG">
+		     <figcaption>En la playa!</figcaption>
+		  </figure>
+		  
+			<figure>
+			<img src="../static/IMG_7017.JPG">
+			<figcaption>Quiquitin!</figcaption>
+			</figure>	
+		  
+		   <figure>
+			<img src="../static/IMG_7205.jpg">
+			<figcaption>Me remplazaron con el quico</figcaption>
+			</figure>
+		  
+		    <figure>
+			<img src="../static/IMG_8031.JPG">
+		    <figcaption>Ese poochazo</figcaption>
+			</figure>	
+
+		    <figure>
+			<img src="../static/IMG_8610.JPG">
+		    <figcaption>Ay a lo papa!!!!!</figcaption>
+			</figure>	
+
+		    <figure>
+			<img src="../static/IMG_6746.JPG">
+		    <figcaption>Vaqueton!</figcaption>
+			</figure>	
+			</div>
+	</body>
+</html>
