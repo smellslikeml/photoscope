@@ -44,8 +44,8 @@ def home():
         data_files = request.files.getlist('file[]')
         for data_file in data_files:
             file_contents = data_file.read()
-            image = Image.open(BytesIO(file_contents))
-            img_array = np.array(image)[:,:,:3]
+            img_array = cv2.imdecode(np.frombuffer(file_contents, np.uint8), -1)
+
 	query_hist = transform_query(img_array)
 	query_dist = partial(dist_calc, query_hist)
 	result_dist = list(map(query_dist, corpus_features))
