@@ -12,7 +12,7 @@ app=Flask(__name__)
 
 data_dir = '/path/to/images'
 bins = 128
-num_results = 20
+num_results = 50
 
 start = time.time()
 
