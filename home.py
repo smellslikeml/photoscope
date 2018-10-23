@@ -38,7 +38,7 @@ def transform_query(img_arr):
     hist = cv2.calcHist([img_arr], [0], None, [bins], [0, 256])
     return hist / (sum(hist) + 1e-10)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == "POST":
         data_files = request.files.getlist('file[]')
