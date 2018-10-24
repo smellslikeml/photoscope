@@ -1,7 +1,7 @@
 # Simple Image Search App
 
 ## Overview
-This is a simple image search flask app. Point it to a directory of images, upload an image, and find the closests image results
+This is a simple image search flask app. Point it to a directory of images, upload an image, and find the closest image results
 
 ![app gif](https://github.com/mayorquinmachines/buddy_search_app/blob/master/image_search_app_demo.gif?raw=true)
 
