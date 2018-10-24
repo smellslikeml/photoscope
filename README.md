@@ -2,10 +2,11 @@
 
 ## Overview
 This is a simple image search flask app. Point it to a directory of images, upload an image, and find the closests image results
-![app gif]()
+
+![app gif](https://github.com/mayorquinmachines/buddy_search_app/blob/master/image_search_app_demo.gif?raw=true)
 
 ## Dependencies
-* [OpenCV]()
+* [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/)
 * [Flask](http://flask.pocoo.org)
 
 ## Install
