@@ -1,7 +1,7 @@
 ///
-/// Stellar by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+/// Indivisible by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
 ///
 
 /* List */
@@ -30,7 +30,7 @@
 			padding-left: 0;
 
 			li {
-				border-top: solid 1px;
+				border-top: solid 1px _palette(border);
 				padding: 0.5em 0;
 
 				&:first-child {
@@ -53,42 +53,4 @@
 		dd {
 			margin-left: _size(element-margin);
 		}
-
-		&.alt {
-			dt {
-				display: block;
-				width: 3em;
-				margin: 0;
-				clear: left;
-				float: left;
-			}
-
-			dd {
-				margin: 0 0 0.85em 5.5em;
-			}
-
-			&:after {
-				content: '';
-				display: block;
-				clear: both;
-			}
-		}
 	}
-
-	@mixin color-list($p: null) {
-		ul {
-			&.alt {
-				li {
-					border-top-color: _palette($p, border);
-				}
-			}
-		}
-
-		dl {
-			dt {
-				color: _palette($p, fg-bold);
-			}
-		}
-	}
-
-	@include color-list;

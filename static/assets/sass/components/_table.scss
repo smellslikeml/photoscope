@@ -1,7 +1,7 @@
 ///
-/// Stellar by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+/// Indivisible by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
 ///
 
 /* Table */
@@ -17,9 +17,13 @@
 
 		tbody {
 			tr {
-				border: solid 1px;
+				border: solid 1px _palette(border);
 				border-left: 0;
 				border-right: 0;
+
+				&:nth-child(2n + 1) {
+					background-color: _palette(border-bg);
+				}
 			}
 		}
 
@@ -28,6 +32,7 @@
 		}
 
 		th {
+			color: _palette(fg-bold);
 			font-size: 0.9em;
 			font-weight: _font(weight-bold);
 			padding: 0 0.75em 0.75em 0.75em;
@@ -35,11 +40,11 @@
 		}
 
 		thead {
-			border-bottom: solid 2px;
+			border-bottom: solid 2px _palette(border);
 		}
 
 		tfoot {
-			border-top: solid 2px;
+			border-top: solid 2px _palette(border);
 		}
 
 		&.alt {
@@ -48,7 +53,7 @@
 			tbody {
 				tr {
 					td {
-						border: solid 1px;
+						border: solid 1px _palette(border);
 						border-left-width: 0;
 						border-top-width: 0;
 
@@ -74,41 +79,3 @@
 			}
 		}
 	}
-
-	@mixin color-table($p: null) {
-		table {
-			tbody {
-				tr {
-					border-color: _palette($p, border);
-
-					&:nth-child(2n + 1) {
-						background-color: _palette($p, border-bg);
-					}
-				}
-			}
-
-			th {
-				color: _palette($p, fg-bold);
-			}
-
-			thead {
-				border-bottom-color: _palette($p, border);
-			}
-
-			tfoot {
-				border-top-color: _palette($p, border);
-			}
-
-			&.alt {
-				tbody {
-					tr {
-						td {
-							border-color: _palette($p, border);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@include color-table;

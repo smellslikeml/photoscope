@@ -1,18 +1,39 @@
 /*
-	Stellar by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Indivisible by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
 */
 
-/* Header */
+/* Panel */
 
-	body.is-preload #header.alt > * {
-		opacity: 1;
+	.panel {
+		margin: 0 0 3em 0;
 	}
 
-	body.is-preload #header.alt .logo {
-		-moz-transform: none;
-		-webkit-transform: none;
-		-ms-transform: none;
-		transform: none;
+		body.is-preload-0 .panel {
+			opacity: 1;
+		}
+
+			body.is-preload-0 .panel > .image {
+				-moz-transform: none !important;
+				-webkit-transform: none !important;
+				-ms-transform: none !important;
+				transform: none !important;
+			}
+
+			body.is-preload-0 .panel > .content {
+				-moz-transform: none !important;
+				-webkit-transform: none !important;
+				-ms-transform: none !important;
+				transform: none !important;
+			}
+
+/* Footer */
+
+	#footer {
+		margin-top: 0;
 	}
+
+		body.is-preload-0 #footer {
+			opacity: 1;
+		}

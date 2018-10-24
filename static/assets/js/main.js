@@ -1,14 +1,19 @@
 /*
-	Stellar by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Indivisible by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
 */
 
 (function($) {
 
 	var	$window = $(window),
+		$document = $(document),
 		$body = $('body'),
-		$main = $('#main');
+		$wrapper = $('#wrapper'),
+		$footer = $('#footer'),
+		$panels = $wrapper.children('.panel'),
+		$animatedLinks = $('.actions.animated a'),
+		$animatedLink = null;
 
 	// Breakpoints.
 		breakpoints({
@@ -23,101 +28,208 @@
 	// Play initial animations on page load.
 		$window.on('load', function() {
 			window.setTimeout(function() {
-				$body.removeClass('is-preload');
+				$body.removeClass('is-preload-0');
+
+				window.setTimeout(function() {
+					$body.removeClass('is-preload-1');
+				}, 1500);
 			}, 100);
 		});
 
-	// Nav.
-		var $nav = $('#nav');
+	// Animated links.
+		$animatedLinks
+			.on('click', function(event) {
 
-		if ($nav.length > 0) {
+				var href = $(this).attr('href');
 
-			// Shrink effect.
-				$main
-					.scrollex({
-						mode: 'top',
-						enter: function() {
-							$nav.addClass('alt');
-						},
-						leave: function() {
-							$nav.removeClass('alt');
-						},
-					});
+				// Not a panel link? Bail.
+					if (href.charAt(0) != '#'
+					||	(href.length > 1 && $panels.filter(href).length == 0))
+						return;
 
-			// Links.
-				var $nav_a = $nav.find('a');
+				// Prevent default.
+					event.preventDefault();
+					event.stopPropagation();
 
-				$nav_a
-					.scrolly({
-						speed: 1000,
-						offset: function() { return $nav.height(); }
-					})
-					.on('click', function() {
+				// Change panels.
+					window.location.hash = '';
+					window.location.hash = href;
 
-						var $this = $(this);
+				// Set animated link.
+					$animatedLink = $(this);
 
-						// External link? Bail.
-							if ($this.attr('href').charAt(0) != '#')
-								return;
+			});
 
-						// Deactivate all links.
-							$nav_a
-								.removeClass('active')
-								.removeClass('active-locked');
+	// Panels.
+		var locked = true;
 
-						// Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
-							$this
-								.addClass('active')
-								.addClass('active-locked');
+		// Fix images.
+			$panels.each(function() {
 
-					})
-					.each(function() {
+				var	$this = $(this),
+					$image = $this.children('.image'),
+					$img = $image.find('img'),
+					position = $img.data('position');
 
-						var	$this = $(this),
-							id = $this.attr('href'),
-							$section = $(id);
+				// Set background.
+					$image.css('background-image', 'url(' + $img.attr('src') + ')');
 
-						// No section for this link? Bail.
-							if ($section.length < 1)
-								return;
+				// Set position (if set).
+					if (position)
+						$image.css('background-position', position);
 
-						// Scrollex.
-							$section.scrollex({
-								mode: 'middle',
-								initialize: function() {
+				// Hide original.
+					$img.hide();
 
-									// Deactivate section.
-										if (browser.canUse('transition'))
-											$section.addClass('inactive');
+			});
 
-								},
-								enter: function() {
+		// Unlock after a delay.
+			window.setTimeout(function() {
+				locked = false;
+			}, 1250);
 
-									// Activate section.
-										$section.removeClass('inactive');
+		// Hashchange event.
+			$window.on('hashchange', function(event) {
 
-									// No locked links? Deactivate all links and activate this section's one.
-										if ($nav_a.filter('.active-locked').length == 0) {
+				var $ul,
+					delay = 0,
+					$panel;
 
-											$nav_a.removeClass('active');
-											$this.addClass('active');
+				// Get panel.
+					if (window.location.hash && window.location.hash != '#')
+						$panel = $(window.location.hash);
+					else
+						$panel = $panels.first();
 
-										}
+				// Prevent default.
+					event.preventDefault();
+					event.stopPropagation();
 
-									// Otherwise, if this section's link is the one that's locked, unlock it.
-										else if ($this.hasClass('active-locked'))
-											$this.removeClass('active-locked');
+				// Locked? Bail.
+					if (locked)
+						return;
 
-								}
-							});
+				// Lock.
+					locked = true;
 
-					});
+				// Animated link?
+ 					if ($animatedLink) {
+
+ 						$ul = $animatedLink.parents('ul');
+
+						// Activate.
+							$animatedLink.addClass('active');
+
+						// Set delay.
+							delay = 250;
+
+					}
+
+				// Delay.
+					window.setTimeout(function() {
+
+						// Deactivate all panels.
+							$panels.addClass('inactive');
+
+						// Deactivate footer.
+							$footer.addClass('inactive');
+
+						// Delay.
+							window.setTimeout(function() {
+
+								// Hide all panels.
+									$panels.hide();
+
+								// Show target panel.
+									$panel.show();
+
+								// Reset scroll.
+									$document.scrollTop(0);
+
+								// Delay.
+									window.setTimeout(function() {
+
+										// Activate target panel.
+											$panel.removeClass('inactive');
+
+										// Animated link?
+											if ($animatedLink) {
+
+												// Deactivate.
+													$animatedLink.removeClass('active');
+
+												// Clear.
+													$animatedLink = null;
+
+											}
+
+										// Unlock.
+											locked = false;
+
+										// IE: Refresh.
+											$window.triggerHandler('--refresh');
+
+										window.setTimeout(function() {
+
+											// Activate footer.
+												$footer.removeClass('inactive');
+
+										}, 250);
+
+									}, 100);
+
+							}, 350);
+
+					}, delay);
+
+			});
+
+		// Initialize.
+			(function() {
+
+				var $panel;
+
+				// Get panel.
+					if (window.location.hash && window.location.hash != '#')
+						$panel = $(window.location.hash);
+					else
+						$panel = $panels.first();
+
+				// Deactivate + hide all but initial panel.
+					$panels.not($panel)
+						.addClass('inactive')
+						.hide();
+
+			})();
+
+	// IE: Fixes.
+		if (browser.name == 'ie') {
+
+			// Layout fixes.
+				$window.on('--refresh', function() {
+
+					// Fix min-height/flexbox.
+						$wrapper.css('height', 'auto');
+
+						window.setTimeout(function() {
+
+							var h = $wrapper.height(),
+								wh = $window.height();
+
+							if (h < wh)
+								$wrapper.css('height', '100vh');
+
+						}, 0);
+
+				});
+
+				$window.on('load', function() {
+					$window.triggerHandler('--refresh');
+				});
+
+			// Disable animated links.
+				$('.actions.animated').removeClass('animated');
 
 		}
-
-	// Scrolly.
-		$('.scrolly').scrolly({
-			speed: 1000
-		});
 
 })(jQuery);

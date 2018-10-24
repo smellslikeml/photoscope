@@ -1,7 +1,7 @@
 ///
-/// Stellar by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+/// Indivisible by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
 ///
 
 /* Button */
@@ -13,27 +13,86 @@
 	.button {
 		@include vendor('appearance', 'none');
 		@include vendor('transition', (
-			'background-color #{_duration(transition)} ease-in-out',
-			'color #{_duration(transition)} ease-in-out'
+			'background-color #{_duration(transition)} ease',
+			'box-shadow #{_duration(transition)} ease',
+			'color #{_duration(transition)} ease'
 		));
+		-webkit-tap-highlight-color: rgba(255,255,255,0);
+		background-color: transparent;
 		border-radius: _size(border-radius);
 		border: 0;
+		box-shadow: inset 0 0 0 1px _palette(border);
+		color: _palette(fg-bold) !important;
 		cursor: pointer;
 		display: inline-block;
-		font-weight: _font(weight);
-		height: 2.75em;
-		line-height: 2.75em;
-		min-width: 9.25em;
-		padding: 0 1.5em;
+		font-size: 0.8em;
+		font-weight: _font(weight-bold);
+		height: 3.5em;
+		letter-spacing: _font(letter-spacing-alt);
+		line-height: 3.5em;
+		padding: 0 2em;
+		position: relative;
 		text-align: center;
 		text-decoration: none;
+		text-transform: uppercase;
 		white-space: nowrap;
 
 		&.icon {
-			padding-left: 1.35em;
-
 			&:before {
 				margin-right: 0.5em;
+			}
+		}
+
+		&.back {
+			padding-left: 4.75em;
+
+			&:before {
+				@include vendor('transition', (
+					'opacity #{_duration(transition)} ease'
+				));
+				background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="112px" height="96px" viewBox="0 0 112 96" zoomAndPan="disable"><style>line { stroke: #{_palette(border)}; stroke-width: 4px }</style><line x1="0" y1="46" x2="112" y2="46" /><line x1="24" y1="22" x2="0" y2="46" /><line x1="24" y1="70" x2="0" y2="46" /></svg>');
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: contain;
+				content: '';
+				display: inline-block;
+				height: inherit;
+				left: 2em;
+				opacity: 1;
+				position: absolute;
+				top: 0;
+				vertical-align: middle;
+				width: 2em;
+			}
+
+			&:after {
+				@include vendor('transition', (
+					'opacity #{_duration(transition)} ease'
+				));
+				background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="112px" height="96px" viewBox="0 0 112 96" zoomAndPan="disable"><style>line { stroke: #{_palette(accent)}; stroke-width: 4px }</style><line x1="0" y1="46" x2="112" y2="46" /><line x1="24" y1="22" x2="0" y2="46" /><line x1="24" y1="70" x2="0" y2="46" /></svg>');
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: contain;
+				content: '';
+				display: inline-block;
+				height: inherit;
+				left: 2em;
+				opacity: 0;
+				position: absolute;
+				top: 0;
+				vertical-align: middle;
+				width: 2em;
+			}
+
+			&:hover,
+			&.active {
+				&:before {
+					opacity: 0;
+				}
+
+				&:after {
+					opacity: 1;
+				}
 			}
 		}
 
@@ -42,68 +101,42 @@
 		}
 
 		&.small {
-			font-size: 0.8em;
+			font-size: 0.7em;
 		}
 
 		&.large {
-			font-size: 1.35em;
+			font-size: 1em;
+		}
+
+		&:hover,
+		&.active {
+			box-shadow: inset 0 0 0 1px _palette(accent);
+			color: _palette(accent) !important;
+		}
+
+		&:active,
+		&.active {
+			background-color: transparentize(_palette(accent), 0.95);
+		}
+
+		&.primary {
+			box-shadow: none;
+			background-color: _palette(fg-bold);
+			color: _palette(bg) !important;
+
+			&:hover {
+				background-color: _palette(accent);
+			}
+
+			&:active {
+				background-color: darken(_palette(accent), 10);
+			}
 		}
 
 		&.disabled,
 		&:disabled {
 			@include vendor('pointer-events', 'none');
+			cursor: default;
 			opacity: 0.25;
 		}
-
-		@include breakpoint('<=small') {
-			min-width: 0;
-		}
 	}
-
-	@mixin color-button($p: null) {
-		input[type="submit"],
-		input[type="reset"],
-		input[type="button"],
-		button,
-		.button {
-			background-color: transparent;
-			box-shadow: inset 0 0 0 1px _palette($p, border);
-			color: _palette($p, fg-bold) !important;
-
-			&:hover {
-				background-color: _palette($p, border-bg);
-			}
-
-			&:active {
-				background-color: _palette($p, border2-bg);
-			}
-
-			&.icon {
-				&:before {
-					color: _palette($p, fg-light);
-				}
-			}
-
-			&.primary {
-				background-color: _palette(accent);
-				color: _palette(invert, bg) !important;
-				box-shadow: none;
-
-				&:hover {
-					background-color: lighten(_palette(accent), 3);
-				}
-
-				&:active {
-					background-color: darken(_palette(accent), 3);
-				}
-
-				&.icon {
-					&:before {
-						color: _palette(invert, bg) !important;
-					}
-				}
-			}
-		}
-	}
-
-	@include color-button;

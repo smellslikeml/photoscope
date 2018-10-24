@@ -1,98 +1,122 @@
 ///
-/// Stellar by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+/// Indivisible by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
 ///
 
 /* Actions */
 
 	ul.actions {
-		@include vendor('display', 'flex');
 		cursor: default;
 		list-style: none;
 		margin-left: (_size(element-margin) * -0.5);
+		margin-top: (_size(element-margin) * -0.5);
 		padding-left: 0;
 
 		li {
-			padding: 0 0 0 (_size(element-margin) * 0.5);
+			display: inline-block;
+			margin: (_size(element-margin) * 0.5) 0 0 (_size(element-margin) * 0.5);
+			padding-left: 0;
 			vertical-align: middle;
-		}
 
-		&.special {
-			@include vendor('justify-content', 'center');
-			width: 100%;
-			margin-left: 0;
-
-			li {
-				&:first-child {
-					padding-left: 0;
-				}
+			&:last-child {
+				padding-right: 0;
 			}
 		}
 
 		&.stacked {
-			@include vendor('flex-direction', 'column');
+			margin-top: 0;
 			margin-left: 0;
 
 			li {
-				padding: (_size(element-margin) * 0.65) 0 0 0;
+				display: block;
+				margin: 0;
+				padding: (_size(element-margin) * 0.75) 0 0 0;
+				position: relative;
 
 				&:first-child {
 					padding-top: 0;
 				}
-			}
-		}
-
-		&.fit {
-			width: calc(100% + #{_size(element-margin) * 0.5});
-
-			li {
-				@include vendor('flex-grow', '1');
-				@include vendor('flex-shrink', '1');
-				width: 100%;
 
 				> * {
-					width: 100%;
+					margin-bottom: 0;
+				}
+
+				> .button {
+					min-width: 15em;
 				}
 			}
 
-			&.stacked {
-				width: 100%;
+			&.special {
+				li {
+					&:after {
+						background-color: _palette(border);
+						content: '';
+						display: block;
+						height: (_size(element-margin) * 0.75);
+						left: 50%;
+						position: absolute;
+						top: 100%;
+						width: 1px;
+					}
+
+					&:last-child {
+						&:after {
+							display: none;
+						}
+					}
+				}
 			}
 		}
 
-		@include breakpoint('<=xsmall') {
-			&:not(.fixed) {
-				@include vendor('flex-direction', 'column');
-				margin-left: 0;
-				width: 100% !important;
+		@include breakpoint('<=small') {
+			&.stacked {
+				&.special {
+					li {
+						padding: (_size(element-margin) * 0.5) 0 0 0;
 
+						&:after {
+							height: (_size(element-margin) * 0.5);
+						}
+					}
+				}
+			}
+		}
+
+		&.animated {
+			&.spinY {
 				li {
-					@include vendor('flex-grow', '1');
-					@include vendor('flex-shrink', '1');
-					padding: (_size(element-margin) * 0.5) 0 0 0;
-					text-align: center;
-					width: 100%;
+					@include vendor('perspective', '1000px');
 
-					> * {
-						width: 100%;
+					a {
+						@include vendor('transition', (
+							'background-color #{_duration(transition)} ease',
+							'box-shadow #{_duration(transition)} ease',
+							'color #{_duration(transition)} ease',
+							'transform 0.5s ease-in'
+						));
+
+						&.active {
+							@include vendor('transform', 'rotateY(480deg)');
+						}
 					}
+				}
+			}
 
-					&:first-child {
-						padding-top: 0;
-					}
+			&.spinX {
+				li {
+					@include vendor('perspective', '1000px');
 
-					input[type="submit"],
-					input[type="reset"],
-					input[type="button"],
-					button,
-					.button {
-						width: 100%;
+					a {
+						@include vendor('transition', (
+							'background-color #{_duration(transition)} ease',
+							'box-shadow #{_duration(transition)} ease',
+							'color #{_duration(transition)} ease',
+							'transform 0.5s ease-in'
+						));
 
-						&.icon {
-							&:before {
-								margin-left: -0.5rem;
-							}
+						&.active {
+							@include vendor('transform', 'rotateX(480deg)');
 						}
 					}
 				}

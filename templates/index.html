@@ -1,21 +1,23 @@
-<!DOCTYPE html>
-<html lang="en" class="no-js">
+<!DOCTYPE HTML>
+<!--
+	Indivisible by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html>
 	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>Image Search</title>
-		<meta name="description" content="my image search engine" />
-		<meta name="keywords" content="image search" />
-		<link rel="stylesheet" type="text/css" href="../static/css/default.css" />
-		<link rel="stylesheet" type="text/css" href="../static/css/component.css" />
+		<title>Untitled</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../static/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../static/assets/css/noscript.css" /></noscript>
 
         <script src="https://code.jquery.com/jquery-1.12.3.js"></script>
         <!--Dropify stuff -->
-        <link rel="stylesheet" href="../static/assets/css/dropify.css">
-        <link rel="stylesheet" href="../static/assets/css/dropify.min.css">
-        <script src="../static/assets/js/dropify.min.js"></script>
-        <script src="../static/assets/js/dropify.js"></script>
+        <link rel="stylesheet" href="../static/css/dropify.css">
+        <link rel="stylesheet" href="../static/css/dropify.min.css">
+        <script src="../static/js/dropify.min.js"></script>
+        <script src="../static/js/dropify.js"></script>
 
         <script>
          $(document).ready(function() {
@@ -35,21 +37,57 @@
                     }
                 }
         </script>
-	</head>
-	<body>
-		<div class="container">
-                        <header>
-				<h1>Image Search<span>Drop an image and search for similar images</span></h1>	
-			</header>
-		</div>
 
-                <div>
-                   <form action="#" method="POST" enctype="multipart/form-data" onSubmit="return check()">
-                      <p><input type="file" id="input-file-now" class="dropify" data-height="350" data-max-file-size="1G" data-allowed-file--extensions="png jpg jpeg" name="file[]" /></p>
-                      <br>
-                      <p><input type="submit" value="Submit" /></p>
-                   </form>
-                </div>
+	</head>
+	<body class="is-preload-0 is-preload-1">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Home -->
+					<article id="home" class="panel special">
+						<div class="content">
+							<!--<img src="images/pic01.jpg" alt="" data-position="center center" />-->
+							<form action="#" method="POST" enctype="multipart/form-data" onSubmit="return check()">
+							   <p>
+							   <input type="file" id="input-file-now" class="dropify" data-height="600" data-max-file-size="1G" data-allowed-file--extensions="png jpg jpeg" name="file[]" /></p>
+							   <br>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<header>
+									<h1>Image Search App</h1>
+									<p>Submit an image<br />
+									to retrieve similar images</p>
+								</header>
+								<nav id="nav">
+									<ul class="actions stacked special animated spinY">
+										<li><input type="submit" value="Submit" class="button"/></li>
+									</ul>
+								</nav>
+								<ul class="icons">
+									<li><a href="https://twitter.com/smellslikeml" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://github.com/smellslikeml" class="icon fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</div>
+							</form>
+						</div>
+					</article>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">Smells Like ML</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<!--<script src="../static/assets/js/jquery.min.js"></script>-->
+			<script src="../static/assets/js/browser.min.js"></script>
+			<script src="../static/assets/js/breakpoints.min.js"></script>
+			<script src="../static/assets/js/util.js"></script>
+			<script src="../static/assets/js/main.js"></script>
 
 	</body>
 </html>

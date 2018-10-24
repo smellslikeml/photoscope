@@ -1,1 +1,3 @@
-# buddy_search_app
+# Simple Image Search App
+
+

@@ -3,26 +3,37 @@
 @import 'libs/mixins';
 @import 'libs/vendor';
 @import 'libs/breakpoints';
-@import 'libs/html-grid';
 
 /*
-	Stellar by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Indivisible by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
 */
 
-/* Header */
+/* Panel */
 
-	#header {
-		body.is-preload & {
-			&.alt {
-				> * {
-					opacity: 1;
-				}
+	.panel {
+		margin: 0 0 (_size(element-margin) * 1.5) 0;
 
-				.logo {
-					@include vendor('transform', 'none');
-				}
+		body.is-preload-0 & {
+			opacity: 1;
+
+			> .image {
+				@include vendor('transform', 'none !important');
 			}
+
+			> .content {
+				@include vendor('transform', 'none !important');
+			}
+		}
+	}
+
+/* Footer */
+
+	#footer {
+		margin-top: 0;
+
+		body.is-preload-0 & {
+			opacity: 1;
 		}
 	}
