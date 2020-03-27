@@ -1,43 +1,26 @@
-#!/usr/bin/env python
 import os
-import cv2
-import numpy as np
 import time
+import numpy as np
 from glob import glob
-from functools import partial
+from PIL import Image
+from io import BytesIO
 from flask import Flask
-from flask import render_template, request, send_from_directory
+from flask import render_template, request, send_from_directory, jsonify
+from elasticsearch import Elasticsearch
 
-app=Flask(__name__)
+import tensorflow as tf
+import tensorflow_hub as hub 
 
-def color_hist(bins, img_pth):
-    img = cv2.imread(img_pth, 0)
-    hist = cv2.calcHist([img], [0], None, [bins], [0, 256])
-    return hist / (sum(hist) + 1e-10)
+feature_extractor_url = "https://tfhub.dev/google/imagenet/mobilenet_v1_050_160/feature_vector/4" #@param {type:"string"}
+feature_extractor_layer = hub.KerasLayer(feature_extractor_url,input_shape=(224,224,3))
 
-def dist_calc(query_img, ref_img):
-    return cv2.compareHist(query_img, ref_img, cv2.HISTCMP_CHISQR)
+client = Elasticsearch()
 
-def transform_query(img_arr):
-    hist = cv2.calcHist([img_arr], [0], None, [bins], [0, 256])
-    return hist / (sum(hist) + 1e-10)
+SEARCH_SIZE = 6
+INDEX_NAME = 'images'
+app = Flask(__name__)
 
-data_dir = '/path/to/images/'
-bins = 128
-num_results = 50
-
-start = time.time()
-
-img_lst = glob(data_dir + '*')
-print('Calculating image features')
-color_hist_ = partial(color_hist, bins)
-corpus_features = list(map(color_hist_, img_lst)) # bottleneck
-
-end = time.time()
-elapsed = end - start
-elapsed_fmt = time.strftime("%H:%M:%S", time.gmtime(elapsed))
-print('Finished feature calculation in {}, beginning search...'.format(elapsed_fmt))
-
+data_dir = 'images/'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -45,19 +28,41 @@ def home():
         data_files = request.files.getlist('file[]')
         for data_file in data_files:
             file_contents = data_file.read()
-            img_array = cv2.imdecode(np.frombuffer(file_contents, np.uint8), -1)
+            image = Image.open(BytesIO(file_contents))
+            image = (np.array(image.resize((224,224)))/255).astype(np.float32)
+            img_array = np.expand_dims(image, axis=0)
+            embedding = feature_extractor_layer(img_array)
+            query_vector = embedding.numpy().tolist()[0]
+        
 
-	query_hist = transform_query(img_array)
-	query_dist = partial(dist_calc, query_hist)
-	result_dist = list(map(query_dist, corpus_features))
-	result_paths = np.argsort(result_dist)[:num_results]
-	result_paths = [img_lst[pth].split('/')[-1] for pth in result_paths]
-	return render_template("results.html", result_paths=result_paths)
+        script_query = {
+            "script_score": {
+                "query": {"match_all": {}},
+                "script": {
+                    "source": "cosineSimilarity(params.query_vector, doc['image_vector']) + 1.0",
+                    "params": {"query_vector": query_vector}
+                }
+            }
+        }
+
+        response = client.search(
+            index=INDEX_NAME,
+            body={
+                "size": SEARCH_SIZE,
+                "query": script_query,
+                "_source": {"includes": ["image"]}
+            }
+        )
+        result_paths = [x['_source']['image'] for x in response['hits']['hits']]
+        result_paths = [pth.split('/')[-1] for pth in result_paths]
+        print(result_paths)
+        return render_template("results.html", result_paths=result_paths)
     return render_template("index.html")
+
 
 @app.route('/image/<path:filename>')
 def get_image(filename):
     return send_from_directory(data_dir, filename)
 
 if __name__ == "__main__":
-    app.run("0.0.0.0")
+    app.run("0.0.0.0", port=5000)
