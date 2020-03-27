@@ -1,7 +1,8 @@
-# Simple Image Search App
+# Reverse Image Search App
 
-## Overview This is a simple image search flask app featuring elasticsearch and mobilenet image embeddings for indexing. Point it to a directory of
-images, upload an image, and find the closest image results!
+## Overview 
+This is a simple image search flask app featuring elasticsearch and mobilenet image embeddings for indexing.
+Point it to a directory of images, upload an image, and find the closest image results!
 
 ![app gif](assets/elastic_imagesearch.gif?raw=true)
 
