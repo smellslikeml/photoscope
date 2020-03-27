@@ -1,10 +1,16 @@
 # Reverse Image Search App
 
 ## Overview 
-This is a simple image search flask app featuring elasticsearch and mobilenet image embeddings for indexing.
-Point it to a directory of images, upload an image, and find the closest image results!
+Have a ton of images on your computer struggling to find what you're looking for? 
 
+This is a simple reverse image search app to help you find your pictures faster.
+Index a directory of images, upload an image to the local app, and receive your most similar images.
 ![app gif](assets/elastic_imagesearch.gif?raw=true)
+
+## How it works
+This flask search app features elasticsearch for fast results and uses image feature vectors extracted with a TFHub hosted headless mobilenet model to find related images with greater context.
+
+Matching images based on similarity of image embeddings offers higher recall of semantically relevant results, helping you find what your looking for faster!
 
 ## Dependencies
 * [Tensorflow==2.1.0](https://www.tensorflow.org/)
@@ -19,7 +25,12 @@ Clone this repo:
 git clone https://github.com/smellslikeml/ImageSearchApp.git
 ```
 
-[Install elasticsearch](https://www.elastic.co/downloads/elasticsearch) and install the rest of the requirements:
+[Install elasticsearch](https://www.elastic.co/downloads/elasticsearch) and start the elasticsearch service:
+```
+sudo service elasticsearch start
+```
+
+Then install the rest of the requirements:
 ```
 pip install -r requirements.txt
 ```
@@ -48,6 +59,11 @@ python app.py
 And navigate to http://localhost:5000/ 
 
 You can drop any image of a scene resembling what you are searching for and the app will return the most similar indexed images.
+
+Stop the elasticsearch service after you are done to free up memory.
+```
+sudo service elasticsearch stop
+```
 
 ## References
 
