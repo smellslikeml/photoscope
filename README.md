@@ -47,3 +47,10 @@ python app.py
 And navigate to http://localhost:5000/ 
 
 You can drop any image of a scene resembling what you are searching for and the app will return the most similar indexed images.
+
+## References
+
+* [Blog post](https://smellslikeml.com/bertsearch.html)
+* [Elasticsearch text embeddings](https://www.elastic.co/blog/text-similarity-search-with-vectors-in-elasticsearch)
+* [Bertsearch](https://github.com/Hironsan/bertsearch)
+* [Extracting image feature vectors](https://www.tensorflow.org/hub/common_signatures/images#feature-vector)
