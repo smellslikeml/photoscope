@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Untitled</title>
+		<title>Image Search App</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="../static/assets/css/main.css" />
@@ -24,13 +24,12 @@
           $('.dropify').dropify();
           });
 
+
      function check()
                 {
-                    var nn = $('input[type="file"]').val()
-                    //var uu = document.getElementById("input-file-now");
-                    console.log(nn)
-                    //if(uu =='' && uu.value== "")
-                    if(nn =='')
+                    var imgInput = $('input[type="file"]').val()
+                    var urlInput = $('input[type="text"]').val()
+                    if(imgInput =='' && urlInput == '')
                     {
                         alert('You must upload an image! :)');
                         return false;
@@ -47,10 +46,12 @@
 				<!-- Home -->
 					<article id="home" class="panel special">
 						<div class="content">
-							<!--<img src="images/pic01.jpg" alt="" data-position="center center" />-->
 							<form action="#" method="POST" enctype="multipart/form-data" onSubmit="return check()">
 							   <p>
 							   <input type="file" id="input-file-now" class="dropify" data-height="600" data-max-file-size="1G" data-allowed-file--extensions="png jpg jpeg" name="file[]" /></p>
+							   <h4>OR enter an image url:</h4>
+							   <p>
+							   <input type="text" name="url" id="url"/></p>
 							   <br>
 						</div>
 						<div class="content">
@@ -83,7 +84,6 @@
 			</div>
 
 		<!-- Scripts -->
-			<!--<script src="../static/assets/js/jquery.min.js"></script>-->
 			<script src="../static/assets/js/browser.min.js"></script>
 			<script src="../static/assets/js/breakpoints.min.js"></script>
 			<script src="../static/assets/js/util.js"></script>

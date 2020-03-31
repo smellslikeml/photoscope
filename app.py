@@ -1,5 +1,6 @@
 import os
 import time
+import requests
 import numpy as np
 from glob import glob
 from PIL import Image
@@ -25,14 +26,18 @@ data_dir = 'images/'
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == "POST":
-        data_files = request.files.getlist('file[]')
-        for data_file in data_files:
+        data_file = request.files.getlist('file[]')[0]
+        url = request.form.get('url')
+        if data_file:
             file_contents = data_file.read()
-            image = Image.open(BytesIO(file_contents))
-            image = (np.array(image.resize((224,224)))/255).astype(np.float32)
-            img_array = np.expand_dims(image, axis=0)
-            embedding = feature_extractor_layer(img_array)
-            query_vector = embedding.numpy().tolist()[0]
+        elif url:
+            response = requests.get(url)
+            file_contents = response.content
+        image = Image.open(BytesIO(file_contents))
+        image = (np.array(image.resize((224,224)))/255).astype(np.float32)
+        img_array = np.expand_dims(image, axis=0)
+        embedding = feature_extractor_layer(img_array)
+        query_vector = embedding.numpy().tolist()[0]
         
 
         script_query = {
@@ -65,4 +70,4 @@ def get_image(filename):
     return send_from_directory(data_dir, filename)
 
 if __name__ == "__main__":
-    app.run("0.0.0.0", port=5000)
+    app.run("0.0.0.0", port=5000, debug=True)
