@@ -5,7 +5,7 @@ from elasticsearch.helpers import bulk
 
 client = Elasticsearch()
 index_name = 'testing'
-data_dir = '/home/funk/image_elasticsearch/photoscope/photoscope/images/'
+data_dir = '/path/to/images'
 
 # Initialize elasticsearch classes
 idx = Index(index_name, cfg.index_file, cfg.data, client)
