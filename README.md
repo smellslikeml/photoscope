@@ -1,4 +1,4 @@
-# Reverse Image Search App
+# Photoscope: Find your memories faster! 
 
 ## Overview 
 Have a ton of images on your computer struggling to find what you're looking for? 
