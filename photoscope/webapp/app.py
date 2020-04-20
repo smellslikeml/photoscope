@@ -22,8 +22,8 @@ client = Elasticsearch()
 
 temp_dir= 'tmp/'
 
-indexer = Index(cfg.index_name, cfg.index_file, cfg.data, client)
-doc = Document(cfg.data_dir, cfg.data, cfg.index_name)
+indexer = Index(cfg.index_name, cfg.index_file, cfg.doc_json, client)
+doc = Document(cfg.data_dir, cfg.doc_json, cfg.index_name)
 
 image_encoder = doc.feature_extractor_layer
 classifier = doc.classifier
@@ -100,7 +100,7 @@ def upload():
 
             # Generate tags for image
             img = Image.open(BytesIO(file_contents))
-            img.save("tmp/" + pic.filename)
+            img.save(temp_dir + pic.filename)
             image = (np.array(img.resize((224,224)))/255).astype(np.float32)
             img_array = np.expand_dims(image, axis=0)
 

@@ -10,7 +10,7 @@ setup(
         version ='1.0.0', 
         author ='Smells Like ML', 
         author_email ='contact@smellslikeml.com', 
-        url ='https://github.com/smellslikeml/ImageSearchApp', 
+        url ='https://github.com/smellslikeml/photoscope', 
         description ='Elasticsearch + Flask for diy image search', 
         long_description = long_description, 
         long_description_content_type ="text/markdown", 
@@ -27,6 +27,7 @@ setup(
             "Operating System :: OS Independent", 
         ), 
         keywords ='smellslikeml, machine learning, search', 
+        include_package_data=True,
         install_requires = requirements, 
         zip_safe = False
 ) 
