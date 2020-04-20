@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<!--
+	Indivisible by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html>
+	<head>
+		<title>Upload: Image Search App</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../static/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../static/assets/css/noscript.css" /></noscript>
+
+	    <!-- Bootstrap core CSS -->
+            <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+            <!-- jQuery UI CSS -->
+            <link href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
+            <!-- Bootstrap styling for Typeahead -->
+            <link href="../static/tags-assets/dist/css/tokenfield-typeahead.css" type="text/css" rel="stylesheet">
+            <!-- Tokenfield CSS -->
+            <link href="../static/tags-assets/dist/css/bootstrap-tokenfield.css" type="text/css" rel="stylesheet">
+            <!-- Docs CSS -->
+            <link href="../static/tags-assets/docs-assets/css/pygments-manni.css" type="text/css" rel="stylesheet">
+            <link href="../static/tags-assets/docs-assets/css/docs.css" type="text/css" rel="stylesheet">
+
+	</head>
+	<body class="is-preload-0 is-preload-1">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Home -->
+					<article id="home" class="panel special">
+					<!--	<div class="content">
+					</div>-->
+						<div class="content">
+							<form action="#" method="POST" enctype="multipart/form-data" onSubmit="return check()">
+							<div class="inner">
+								{% for i in range(images_list|length)%}
+								<img src="{{ url_for('get_temp', filename=images_list[i]) }}">
+								<input type="text" class="form-control" name="tokenfield{{ i }}" id="tokenfield{{ i }}" value="{{ tags_list[i] }}" />
+
+								{% endfor %}
+								<nav id="nav">
+                                                                        <ul class="actions stacked special animated spinY">
+                                                                                <li><input type="submit" value="Submit" class="button"/></li>
+                                                                        </ul>
+                                                                </nav>
+							</div>
+							</form>
+						</div>
+					</article>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">Smells Like ML</p>
+					</footer>
+
+			</div>
+
+			    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/i18n/jquery-ui-i18n.min.js"></script>
+			    <script type="text/javascript" src="../static/tags-assets/dist/bootstrap-tokenfield.js" charset="UTF-8"></script>
+			    <script type="text/javascript" src="../static/tags-assets/docs-assets/js/scrollspy.js" charset="UTF-8"></script>
+			    <script type="text/javascript" src="../static/tags-assets/docs-assets/js/affix.js" charset="UTF-8"></script>
+			    <script type="text/javascript" src="../static/tags-assets/docs-assets/js/typeahead.bundle.min.js" charset="UTF-8"></script>
+			    <script type="text/javascript" src="../static/tags-assets/docs-assets/js/docs.min.js" charset="UTF-8"></script>
+			    <script>
+				{% for i in range(tags_list|length) %}
+                                   $('#tokenfield{{ i }}').tokenfield({
+					});
+				{% endfor %}
+
+			    </script>
+		<!-- Scripts -->
+			<script src="../static/assets/js/browser.min.js"></script>
+			<script src="../static/assets/js/breakpoints.min.js"></script>
+			<script src="../static/assets/js/util.js"></script>
+			<script src="../static/assets/js/main.js"></script>
+
+
+	</body>
+</html>

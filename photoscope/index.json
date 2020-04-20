@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "dynamic": "true",
+    "_source": {
+      "enabled": "true"
+    },
+    "properties": {
+      "filepath": {
+        "type": "text"
+      },
+      "image_vector": {
+        "type": "dense_vector",
+        "dims": 512
+      },
+      "tag": {
+        "type": "text"
+      },
+      "tag_vector": {
+        "type": "dense_vector",
+        "dims": 512
+      }
+    }
+  }
+}
