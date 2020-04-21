@@ -1,8 +1,5 @@
 from setuptools import setup, find_packages 
   
-with open('requirements.txt') as f: 
-    requirements = f.readlines() 
-  
 long_description = 'Simple command line tool for launching an image search app using elasticsearch and mobilenet embeddings.' 
   
 setup( 
@@ -28,7 +25,14 @@ setup(
         ), 
         keywords ='smellslikeml, machine learning, search', 
         include_package_data=True,
-        install_requires = requirements, 
+        install_requires = [
+            'tensorflow==2.1.0',
+            'tensorflow_hub==0.7.0',
+            'elasticsearch==7.6.0',
+            'pillow==7.0.0',
+            'flask==1.1.1',
+            'requests'
+            ], 
         zip_safe = False
 ) 
 
