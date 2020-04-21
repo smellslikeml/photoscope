@@ -70,7 +70,6 @@ class Document(object):
                 'image': path + fl,
             }
             docs.append(doc)
-        print('loaded dataset')
         return docs
     
 
@@ -96,7 +95,6 @@ class Document(object):
     def run(self):
         docs = self.loadDataset(self.image_dir)
         with open(self.data, 'w') as f:
-            print('Getting bulk predict...')
             for doc, preds in zip(docs, self.bulkPredict(docs)):
                 d = self.createDocument(doc, preds[0], preds[1], preds[2], self.index_name)
                 f.write(json.dumps(d) + '\n')

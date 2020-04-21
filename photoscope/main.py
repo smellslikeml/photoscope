@@ -1,4 +1,5 @@
 import os
+import logging
 import argparse
 import photoscope.config as cfg
 from photoscope.utils import Index, Document
@@ -35,7 +36,6 @@ def main():
 
 
     args = parser.parse_args()
-    print(args)
     if args.subcommand == 'configure':
         new_vars = ["data_dir='{}'".format(str(args.data_dir)),
                     "search_size='{}'".format(str(args.search_size)),
@@ -58,16 +58,16 @@ def main():
         doc = Document(cfg.data_dir, cfg.doc_json, cfg.index_name)
 
         # Create an index
-        print('Creating index ', cfg.index_name)
+        logging.info('Creating index {}'.format(str(cfg.index_name)))
         idx.createIndex()
 
-        print('Creating documents..')
+        logging.info('Creating documents...')
         doc.run()
 
-        print('Bulk indexing..')
+        logging.info('Bulk indexing documents...')
         idx.bulkIndex()
 
-        print('Done!')
+        logging.info('DONE!')
         
     elif args.subcommand == 'app':
         assert (cfg.data_dir!=None), "The data_dir flag has not been set, please run: photoscope configure --data_dir='/path/to/imgs/'"
