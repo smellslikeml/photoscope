@@ -4,7 +4,7 @@ long_description = 'Simple command line tool for launching an image search app u
   
 setup( 
         name ='photoscope', 
-        version ='1.0.1', 
+        version ='1.0.2', 
         author ='Smells Like ML', 
         author_email ='contact@smellslikeml.com', 
         url ='https://github.com/smellslikeml/photoscope', 

@@ -13,48 +13,50 @@ This flask search app features elasticsearch for fast results and uses image fea
 Matching images based on similarity of image embeddings offers higher recall of semantically relevant results, helping you find what your looking for faster!
 
 ## Dependencies
+* Python 3
 * [Tensorflow==2.1.0](https://www.tensorflow.org/)
 * [Tensorflow Hub](https://www.tensorflow.org/hub)
 * [Elasticsearch](https://www.elastic.co/elasticsearch/?ultron=[EL]-[B]-[AMER]-US+CA-Exact&blade=adwords-s&Device=c&thor=elasticsearch&gclid=Cj0KCQjwyPbzBRDsARIsAFh15JYEyhRFpwbjk_M-v67OAevQez72jXQuIY5VbZinBakVJr5UelxEdlgaAl93EALw_wcB)
 * [Pillow](https://pillow.readthedocs.io/en/stable/)
 * [Flask](http://flask.pocoo.org)
+* Requests
 
 ## Install
-Clone this repo:
+Pip install the package:
+```
+pip install photoscope
+```
+
+Or clone this repo and install:
 ```
 git clone https://github.com/smellslikeml/photoscope.git
+cd photoscope/
+pip install -e .
 ```
 
 [Install elasticsearch](https://www.elastic.co/downloads/elasticsearch) and start the elasticsearch service:
 ```
 sudo service elasticsearch start
 ```
-
-Then install the rest of the requirements:
+## Configure photoscope
+First, make sure to configure photoscope with the full path to your images directory:
 ```
-pip install -r requirements.txt
+$ photoscope configure --data_dir="/path/to/images/"
 ```
+Add the ```--index_name``` flag to change the default index name ```--index_name="MyIndexName"```.
 
 ## Index images
-First create your index:
+After configuring, run:
 ```
-python create_index.py
+$ photoscope index
 ```
+This will bulk index all files in the image directory named. 
 
-And create documents to index from your images:
-```
-python create_documents.py
-```
 
-Finally, index the created documents:
+## Run the app
+Run the flask app with:
 ```
-python index_documents.py
-```
-
-## Run
-Run the flask app:
-```
-python app.py
+$ photoscope app start
 ```
 And navigate to http://localhost:5000/ 
 
