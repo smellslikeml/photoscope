@@ -22,7 +22,7 @@ Matching images based on similarity of image embeddings offers higher recall of 
 ## Install
 Clone this repo:
 ```
-git clone https://github.com/smellslikeml/ImageSearchApp.git
+git clone https://github.com/smellslikeml/photoscope.git
 ```
 
 [Install elasticsearch](https://www.elastic.co/downloads/elasticsearch) and start the elasticsearch service:

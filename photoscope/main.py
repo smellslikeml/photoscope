@@ -1,6 +1,11 @@
+import os
 import argparse
 import photoscope.config as cfg
 from photoscope.utils import Index, Document
+
+CURRENT_DIR = os.path.dirname(__file__)
+os.chdir(CURRENT_DIR)
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -42,6 +47,7 @@ def main():
                 f.write(var+'\n')
 
     elif args.subcommand == 'index':
+        assert (cfg.data_dir!=None), "The data_dir flag has not been set, please run: photoscope configure --data_dir='/path/to/imgs/'"
         from elasticsearch import Elasticsearch
         from elasticsearch.helpers import bulk
 
@@ -64,7 +70,7 @@ def main():
         print('Done!')
         
     elif args.subcommand == 'app':
-        import os
+        assert (cfg.data_dir!=None), "The data_dir flag has not been set, please run: photoscope configure --data_dir='/path/to/imgs/'"
         os.chdir("webapp/")
 
         filelist = [ f for f in os.listdir("tmp/")]

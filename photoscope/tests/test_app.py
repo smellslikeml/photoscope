@@ -2,10 +2,7 @@ import sys
 sys.path.append('webapp/')
 from utils import *
 import config as cfg
-from elasticsearch import Elasticsearch
-from elasticsearch.helpers import bulk
 
-client = Elasticsearch()
 app = True
 
 if app:

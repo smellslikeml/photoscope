@@ -23,6 +23,26 @@
             <!-- Docs CSS -->
             <link href="../static/tags-assets/docs-assets/css/pygments-manni.css" type="text/css" rel="stylesheet">
             <link href="../static/tags-assets/docs-assets/css/docs.css" type="text/css" rel="stylesheet">
+	       <style>
+		section {
+		  max-width: 160px;
+		  height: auto;
+		  border: 1px solid #a2a2a2;
+		  text-align: center;
+		  margin: 10px;
+		}
+
+		img {
+		  width: 100%;
+		}
+
+		.parent--products {
+		  display: flex;
+		  flex-flow: row wrap;
+		  justify-content: center;
+		}
+	      </style> 
+
 
 	</head>
 	<body class="is-preload-0 is-preload-1">
@@ -37,11 +57,21 @@
 						<div class="content">
 							<form action="#" method="POST" enctype="multipart/form-data" onSubmit="return check()">
 							<div class="inner">
+                                                            <div class="parent--products">
 								{% for i in range(images_list|length)%}
-								<img src="{{ url_for('get_temp', filename=images_list[i]) }}">
-								<input type="text" class="form-control" name="tokenfield{{ i }}" id="tokenfield{{ i }}" value="{{ tags_list[i] }}" />
+								  <section class="products">
+								    <div class="product-card">
+								      <div class="product-image">
+									<img src="{{ url_for('get_temp', filename=images_list[i]) }}">
+								      </div>
+								      <div class="product-info">
+									<input type="text" class="form-control" name="tokenfield{{ i }}" id="tokenfield{{ i }}" value="{{ tags_list[i] }}" />
+								      </div>
+								    </div>
+								  </section>
 
 								{% endfor %}
+                                                             </div>
 								<nav id="nav">
                                                                         <ul class="actions stacked special animated spinY">
                                                                                 <li><input type="submit" value="Submit" class="button"/></li>
