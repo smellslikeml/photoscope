@@ -4,6 +4,9 @@ import argparse
 import photoscope.config as cfg
 from photoscope.utils import Index, Document
 
+logger = logging.getLogger('photoscope')
+logger.setLevel(logging.DEBUG)
+
 CURRENT_DIR = os.path.dirname(__file__)
 os.chdir(CURRENT_DIR)
 
@@ -73,9 +76,13 @@ def main():
         assert (cfg.data_dir!=None), "The data_dir flag has not been set, please run: photoscope configure --data_dir='/path/to/imgs/'"
         os.chdir("webapp/")
 
-        filelist = [ f for f in os.listdir("tmp/")]
+        temp_dir = "tmp/"
+        if not os.path.exists(temp_dir):
+            os.makedirs(temp_dir)
+
+        filelist = [ f for f in os.listdir(temp_dir)]
         for f in filelist:
-            os.remove(os.path.join("tmp/", f))
+            os.remove(os.path.join(temp_dir, f))
 
         from photoscope.webapp.app import app
         app.secret_key = 'super secret key'
