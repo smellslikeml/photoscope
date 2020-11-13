@@ -26,7 +26,7 @@ setup(
         keywords ='smellslikeml, machine learning, search', 
         include_package_data=True,
         install_requires = [
-            'tensorflow==2.1.0',
+            'tensorflow==2.3.1',
             'tensorflow_hub==0.7.0',
             'elasticsearch==7.6.0',
             'pillow==7.0.0',
