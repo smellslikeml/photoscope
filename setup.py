@@ -29,7 +29,7 @@ setup(
             'tensorflow==2.1.0',
             'tensorflow_hub==0.7.0',
             'elasticsearch==7.6.0',
-            'pillow==7.0.0',
+            'pillow==9.0.1',
             'flask==1.1.1',
             'requests'
             ], 
