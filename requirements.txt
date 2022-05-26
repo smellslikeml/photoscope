@@ -1,4 +1,4 @@
-tensorflow==2.1.0
+tensorflow==2.7.2
 tensorflow_hub==0.7.0
 elasticsearch==7.6.0
 pillow==7.0.0
